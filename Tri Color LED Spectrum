@@ -1,0 +1,40 @@
+
+int redPin = 11;   // R petal on RGB LED module connected to digital pin 11 
+int greenPin = 10; // G petal on RGB LED module connected to digital pin 10 
+int bluePin = 9;   // B petal on RGB LED module connected to digital pin 9 
+void setup()    
+{   
+   pinMode(redPin, OUTPUT);   // sets the redPin to be an output 
+   pinMode(greenPin, OUTPUT); // sets the greenPin to be an output 
+   pinMode(bluePin, OUTPUT);  // sets the bluePin to be an output
+   setColorRgb(0,0,0);
+}  
+
+void loop()  // run over and over again  
+{    
+    unsigned int rgbColor[3];
+    
+    rgbColor[0] = 255;
+    rgbColor[1] = 0;
+    rgbColor[2] = 0;
+    
+    for (int decColor = 0; decColor < 3; decColor += 1) {
+      int incColor = decColor == 2 ? 0 : decColor +1;
+      
+      for (int i = 0; i < 255; i += 1) {
+        rgbColor[decColor] -+ 1;
+        rgbColor[incColor] += 1;
+        
+        setColorRgb(rgbColor[0],rgbColor[1], rgbColor[2]);
+        delay(5);
+      }
+    }
+}     
+     
+void setColorRgb (unsigned int red, unsigned int green, unsigned int blue)// the color generating function  
+{    
+     analogWrite(redPin, red);     // PWM signal output   
+     analogWrite(greenPin, green); // PWM signal output
+     analogWrite(bluePin, blue);   // PWM signal output
+}     
+
